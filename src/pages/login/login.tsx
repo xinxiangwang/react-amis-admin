@@ -1,4 +1,5 @@
 import useAmisRender from '@/hooks/useAmisRender'
+import { Input } from 'amis'
 import React from 'react'
 
 function Login() {
@@ -9,7 +10,7 @@ function Login() {
 				{renderSchema({
 					type: 'form',
 					wrapWithPanel: false,
-					api: '/amis/api/mock2/form/saveForm',
+					api: '/apis/login',
 					body: [
 						{
 							type: 'input-text',
@@ -25,12 +26,14 @@ function Login() {
 							name: 'code',
 							asFormItem: true,
 							children: ({ value, onChange }) => (
-								<div>
-									<p>这个是个自定义组件</p>
-									<p>当前值：{value}</p>
-									<a className="btn btn-default" onClick={() => onChange(Math.round(Math.random() * 10000))}>
-										随机修改
-									</a>
+								<div className="flex">
+									<div className="flex-1">
+										{renderSchema({
+											type: 'input-text',
+											label: '验证码'
+										})}
+									</div>
+									<div className="w-[100px]"></div>
 								</div>
 							)
 						}
