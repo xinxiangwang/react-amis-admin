@@ -1,6 +1,4 @@
 import useAmisRender from '@/hooks/useAmisRender'
-import { Input } from 'amis'
-import React from 'react'
 
 function Login() {
 	const { renderSchema } = useAmisRender()
@@ -10,7 +8,7 @@ function Login() {
 				{renderSchema({
 					type: 'form',
 					wrapWithPanel: false,
-					api: '/apis/login',
+					api: '/login',
 					body: [
 						{
 							type: 'input-text',
@@ -36,6 +34,10 @@ function Login() {
 									<div className="w-[100px]"></div>
 								</div>
 							)
+						},
+						{
+							type: 'submit',
+							label: '登录'
 						}
 					]
 				})}

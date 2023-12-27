@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "amis": "^3.6.3",
+    "antd": "^5.12.5",
     "axios": "^1.6.2",
     "js-cookie": "^3.0.5",
     "mobx": "^6.12.0",

@@ -12,12 +12,12 @@ export default defineConfig({
 	},
 	server: {
 		proxy: {
-			'/apis': {
-				target: 'http://rap2api.taobao.org/app/mock/316582',
+			[import.meta.env.VITE_BASE_API]: {
+				target: import.meta.env.VITE_SERVER_URL,
 				ws: true,
 				/** 是否允许跨域 */
 				changeOrigin: true,
-				rewrite: (path) => path.replace(new RegExp('^/apis'), '')
+				rewrite: (path) => path.replace(new RegExp(`^${import.meta.env.VITE_BASE_API}`), '')
 			}
 		}
 	}
