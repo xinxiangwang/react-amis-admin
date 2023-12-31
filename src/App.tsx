@@ -8,7 +8,7 @@ import { useAppStore } from './store'
 
 const AuthPage = observer(({ children }: { children: JSX.Element }) => {
 	const appStore = useAppStore()
-	if (!appStore.userInfo.token) {
+	if (!appStore.userInfo.isLogin) {
 		return <Navigate to="/login" />
 	}
 	return <>{children}</>

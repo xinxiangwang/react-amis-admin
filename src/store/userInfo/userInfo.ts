@@ -1,16 +1,26 @@
+import { getTokenCookie, setTokenCookie } from '@/utils/cookie'
 import { makeAutoObservable, configure } from 'mobx'
 import { IUserInfoStore } from './userInfo.model'
 configure({
 	isolateGlobalState: true
 })
 export class UserInfoStore implements IUserInfoStore {
-	token: string = '123123123'
+	token = getTokenCookie()
+
+	get isLogin() {
+		return !!this.token
+	}
+
+	setToken(token: string) {
+		this.token = token
+		setTokenCookie(this.token)
+	}
 
 	logout() {
 		this.token = ''
+		setTokenCookie(this.token)
 	}
 	constructor() {
-		console.log('1231231')
 		makeAutoObservable(this)
 	}
 }

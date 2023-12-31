@@ -1,3 +1,3 @@
 export interface IUserInfoStore {
-	token: string
+	token?: string
 }

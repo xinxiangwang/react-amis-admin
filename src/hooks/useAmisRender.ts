@@ -10,8 +10,6 @@ export default function useAmisRender() {
 	}
 	const defaultRootRenderProps: RootRenderProps = {
 		fetcher: (config) => {
-			console.log(config)
-			console.log(service(config))
 			return service(config)
 		}
 	}
