@@ -9,6 +9,7 @@ export default function useAmisRender() {
 		theme: 'antd'
 	}
 	const defaultRootRenderProps: RootRenderProps = {
+		enableAMISDebug: true,
 		fetcher: (config) => {
 			return service(config)
 		}

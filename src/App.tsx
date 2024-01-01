@@ -1,35 +1,13 @@
-import { observer } from 'mobx-react-lite'
-import { Navigate, Route, Routes } from 'react-router-dom'
-import Layouts from './layouts/layouts'
-import Dashboard from './pages/dashboard/dashboard'
-import Login from './pages/login/login'
-import NotFound from './pages/not-found/not-found'
-import { useAppStore } from './store'
-
-const AuthPage = observer(({ children }: { children: JSX.Element }) => {
-	const appStore = useAppStore()
-	if (!appStore.userInfo.isLogin) {
-		return <Navigate to="/login" />
-	}
-	return <>{children}</>
-})
+import { RouterProvider } from 'react-router-dom'
+import PageSpin from './components/PageSpin'
+import { router } from './routes'
 
 const App = () => {
 	return (
-		<Routes>
-			<Route
-				path="/"
-				element={
-					<AuthPage>
-						<Layouts />
-					</AuthPage>
-				}
-			>
-				<Route path="dashboard" element={<Dashboard />}></Route>
-			</Route>
-			<Route path="/login" element={<Login />}></Route>
-			<Route path="*" element={<NotFound />}></Route>
-		</Routes>
+		<RouterProvider
+      router={router}
+      fallbackElement={<PageSpin />}
+    />
 	)
 }
 

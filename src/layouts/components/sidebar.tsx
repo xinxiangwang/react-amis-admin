@@ -1,45 +1,40 @@
-import useAmisRender from '@/hooks/useAmisRender'
+import { useMatches, useNavigate } from 'react-router-dom'
+import { Layout, theme, Menu } from 'antd'
+import { useState } from 'react';
+import type { MenuProps } from 'antd';
+type MenuItem = Required<MenuProps>['items'][number];
 
 function LayoutSidebar() {
-	const { renderSchema } = useAmisRender()
+	const navigate = useNavigate()
+	const matches = useMatches()
+
+	const [collapsed, setCollapsed] = useState(false);
+	const items: MenuItem[] = [
+		{
+			label: 'dashboard',
+			key: '/dashboard'
+		},
+		{
+			label: 'dashboard1',
+			key: '/dashboard1'
+		},
+		{
+			label: 'dashboard2',
+			key: '/dashboard2'
+		}
+	]
+
+	const [defaultSelectedKeys, setDefaultSelectedKeys] = useState<string[]>(matches.map(item => item.pathname))
+
+	const onMenuClick = ({ key }) => {
+		navigate(key)
+		setDefaultSelectedKeys([...defaultSelectedKeys, key])
+	}
 	return (
-		<nav className="w-[160px] h-full overflow-y-auto bg-slate-300">
-			{renderSchema({
-				type: 'nav',
-				stacked: true,
-				className: 'w-md',
-				links: [
-					{
-						label: 'Dashboard',
-						to: '/dashboard',
-						icon: 'fa fa-user'
-					},
-					{
-						label: 'Nav 2',
-						unfolded: true,
-						children: [
-							{
-								label: 'Nav 2-1',
-								children: [
-									{
-										label: 'Nav 2-1-1',
-										to: '/docs/api-2-1-1'
-									}
-								]
-							},
-							{
-								label: 'Nav 2-2',
-								to: '/docs/api-2-2'
-							}
-						]
-					},
-					{
-						label: 'Nav 3',
-						to: '/docs/renderers'
-					}
-				]
-			})}
-		</nav>
+		<Layout.Sider collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+			<div className="demo-logo-vertical" />
+			<Menu theme="dark" defaultSelectedKeys={defaultSelectedKeys} mode="inline" items={items} onClick={onMenuClick} />
+		</Layout.Sider>
 	)
 }
 

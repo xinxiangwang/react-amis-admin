@@ -8,7 +8,7 @@ function Login() {
 	const navigate = useNavigate()
 
 	if (appStore.userInfo.isLogin) {
-		return <Navigate to="/" />
+		return <Navigate to='/' replace />
 	}
 	return (
 		<div className="w-full h-full flex items-center justify-center">
@@ -44,7 +44,7 @@ function Login() {
 								{
 									asFormItem: true,
 									label: ' ',
-									children: ({ value, onChange }) => (
+									children: () => (
 										<div className="w-[100px] bg-[pink] h-[32px]"></div>
 									)
 								},
@@ -63,7 +63,6 @@ function Login() {
 								{
 									actionType: 'custom',
 									script: function (context, doAction, event) {
-										console.log(event.data.result.data.token)
 										appStore.userInfo.setToken(event.data.result.data.token)
 										navigate('/')
 									},

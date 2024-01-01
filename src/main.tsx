@@ -5,7 +5,6 @@ import 'amis/lib/helper.css'
 import 'amis/sdk/iconfont.css'
 import App from './App'
 import './index.scss'
-import { BrowserRouter } from 'react-router-dom'
 import { appStore, StoreContext } from './store'
 import { configure } from 'mobx'
 
@@ -17,10 +16,8 @@ configure({
 })
 
 ReactDOM.render(
-	<BrowserRouter>
-		<StoreContext.Provider value={appStore}>
-			<App />
-		</StoreContext.Provider>
-	</BrowserRouter>,
+	<StoreContext.Provider value={appStore}>
+		<App />
+	</StoreContext.Provider>,
 	document.getElementById('root')
 )
