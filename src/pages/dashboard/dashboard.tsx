@@ -1,8 +1,6 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 function Dashboard() {
-	console.log('czxczxc')
 	const jump = useNavigate()
 	const onJump = () => {
 		jump('/user')
