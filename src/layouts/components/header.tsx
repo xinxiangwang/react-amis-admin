@@ -1,24 +1,24 @@
 import { useAppStore } from '@/store'
-import { Button } from 'amis'
 import { observer } from 'mobx-react-lite'
-import { useEffect } from 'react'
-import { Layout, theme } from 'antd'
-
+import { Avatar, Dropdown, Layout } from 'antd'
+import { UserOutlined } from '@ant-design/icons'
+import type { MenuProps } from 'antd'
 const LayoutHeader = observer(() => {
 	const appStore = useAppStore()
-	const onLogout = () => {
-		appStore.userInfo.logout()
-	}
-	const {
-    token: { colorBgContainer },
-  } = theme.useToken();
-	useEffect(() => {
-		console.log('LayoutHeader render')
-	}, [])
+	const items: MenuProps['items'] = [
+		{
+			key: '1',
+			label: '退出登录',
+			onClick: () => {
+				appStore.userInfo.logout()
+			}
+		}
+	]
 	return (
-		<Layout.Header style={{ padding: 0, background: 'pink' }}>
-				<span>{appStore.userInfo.token}</span>
-				<Button onClick={onLogout}>退出登录</Button>
+		<Layout.Header className="flex items-center justify-end" style={{ padding: 0, background: 'white' }}>
+			<Dropdown trigger={['click']} menu={{ items }}>
+				<Avatar className="mr-[50px] cursor-pointer" icon={<UserOutlined />} />
+			</Dropdown>
 		</Layout.Header>
 	)
 })
