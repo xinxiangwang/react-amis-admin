@@ -5,26 +5,98 @@ function User() {
 	return renderSchema({
 		type: 'page',
 		body: {
-			type: 'table',
-			tableLayout: 'fixed',
-			data: {
-				items: [
-					{ id: 1, engine: 1 },
-					{ id: 2, engine: 2 }
-				]
-			},
+			type: 'crud',
+			api: '/userList',
+			syncLocation: false,
 			columns: [
 				{
 					name: 'id',
 					label: 'ID'
 				},
 				{
-					name: 'engine',
-					component: (params) => {
-						console.log(params)
-						return <h1>123</h1>
-					},
-					label: 'Rendering engine'
+					name: 'name',
+					label: 'Name'
+				},
+				{
+					name: 'age',
+					label: 'Age'
+				},
+				{
+					name: 'math',
+					label: 'Math'
+				},
+				{
+					name: 'english',
+					label: 'English'
+				},
+				{
+					name: 'chinnese',
+					label: 'Chinese'
+				},
+				{
+					name: 'history',
+					label: 'History'
+				},
+				{
+					name: 'computer',
+					label: 'Computer'
+				},
+				{
+					type: 'operation',
+					label: '操作',
+					buttons: [
+						{
+							label: '详情',
+							type: 'button',
+							level: 'link',
+							actionType: 'dialog',
+							dialog: {
+								title: '查看详情',
+								body: {
+									type: 'form',
+									body: [
+										{
+											type: 'input-text',
+											name: 'engine',
+											label: 'Engine'
+										},
+										{
+											type: 'input-text',
+											name: 'browser',
+											label: 'Browser'
+										},
+										{
+											type: 'input-text',
+											name: 'platform',
+											label: 'platform'
+										},
+										{
+											type: 'input-text',
+											name: 'version',
+											label: 'version'
+										},
+										{
+											type: 'control',
+											label: 'grade',
+											body: {
+												type: 'tag',
+												label: '${grade}',
+												displayMode: 'normal',
+												color: 'active'
+											}
+										}
+									]
+								}
+							}
+						},
+						{
+							label: '删除',
+							type: 'button',
+							level: 'link',
+							className: 'text-danger ${this.chinnese}',
+							disabledOn: 'this.chinnese > 10'
+						}
+					]
 				}
 			]
 		}
